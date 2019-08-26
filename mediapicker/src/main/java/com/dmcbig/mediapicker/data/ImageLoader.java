@@ -4,7 +4,6 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -66,7 +65,7 @@ public class ImageLoader extends LoaderM implements LoaderManager.LoaderCallback
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID));
 
                 if (size < 1) continue;
-                if(path == null || path.equals("")) continue;
+                if (path == null || path.equals("")) continue;
                 String dirName = getParent(path);
                 Media media = new Media(path, name, dateTime, mediaType, size, id, dirName);
                 allFolder.addMedias(media);

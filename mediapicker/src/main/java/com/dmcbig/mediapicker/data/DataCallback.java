@@ -5,7 +5,6 @@ import com.dmcbig.mediapicker.entity.Folder;
 import java.util.ArrayList;
 
 
-
 public interface DataCallback {
 
 

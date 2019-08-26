@@ -59,7 +59,7 @@ public class FileUtils {
         return getCacheDirectory(context, true);
     }
 
-    public static String getRealPathFromURI(Context context,Uri contentURI) {
+    public static String getRealPathFromURI(Context context, Uri contentURI) {
         String result;
         Cursor cursor = context.getContentResolver().query(contentURI, null, null, null, null);
         if (cursor == null) { // Source is Dropbox or other similar local file path
