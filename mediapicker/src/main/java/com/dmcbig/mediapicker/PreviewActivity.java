@@ -3,43 +3,40 @@ package com.dmcbig.mediapicker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import com.dmcbig.mediapicker.entity.Media;
 import com.dmcbig.mediapicker.view.PreviewFragment;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
  * Created by dmcBig on 2017/8/9.
  */
 
-public class PreviewActivity extends FragmentActivity implements View.OnClickListener, ViewPager.OnPageChangeListener{
+public class PreviewActivity extends FragmentActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
     Button done;
     LinearLayout check_layout;
     ImageView check_image;
     ViewPager viewpager;
     TextView bar_title;
-    View top,bottom;
+    View top, bottom;
     ArrayList<Media> preRawList, selects;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +48,8 @@ public class PreviewActivity extends FragmentActivity implements View.OnClickLis
         bar_title = (TextView) findViewById(R.id.bar_title);
         done = (Button) findViewById(R.id.done);
         done.setOnClickListener(this);
-        top= findViewById(R.id.top);
-        bottom= findViewById(R.id.bottom);
+        top = findViewById(R.id.top);
+        bottom = findViewById(R.id.bottom);
         viewpager = (ViewPager) findViewById(R.id.viewpager);
         preRawList = getIntent().getParcelableArrayListExtra(PickerConfig.PRE_RAW_LIST);
         selects = new ArrayList<>();
@@ -124,17 +121,16 @@ public class PreviewActivity extends FragmentActivity implements View.OnClickLis
         finish();
     }
 
-    public void setBarStatus(){
-        Log.e("setBarStatus","setBarStatus");
-        if(top.getVisibility()==View.VISIBLE){
+    public void setBarStatus() {
+        Log.e("setBarStatus", "setBarStatus");
+        if (top.getVisibility() == View.VISIBLE) {
             top.setVisibility(View.GONE);
             bottom.setVisibility(View.GONE);
-        }else{
+        } else {
             top.setVisibility(View.VISIBLE);
             bottom.setVisibility(View.VISIBLE);
         }
     }
-
 
 
     @Override
@@ -142,7 +138,6 @@ public class PreviewActivity extends FragmentActivity implements View.OnClickLis
         done(selects, PickerConfig.RESULT_UPDATE_CODE);
         super.onBackPressed();
     }
-
 
 
     public class AdapterFragment extends FragmentStatePagerAdapter {

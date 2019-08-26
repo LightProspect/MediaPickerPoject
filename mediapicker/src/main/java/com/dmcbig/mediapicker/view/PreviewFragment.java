@@ -5,16 +5,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.dmcbig.mediapicker.PreviewActivity;
@@ -34,7 +32,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class PreviewFragment extends Fragment {
     private PhotoView mPhotoView;
     ImageView play_view;
- //   private PhotoViewAttacher mAttacher;
+    //   private PhotoViewAttacher mAttacher;
 
     public static PreviewFragment newInstance(Media media, String label) {
         PreviewFragment f = new PreviewFragment();
@@ -65,7 +63,7 @@ public class PreviewFragment extends Fragment {
         mPhotoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
             @Override
             public void onPhotoTap(View view, float x, float y) {
-                PreviewActivity previewActivity=  (PreviewActivity)getActivity();
+                PreviewActivity previewActivity = (PreviewActivity) getActivity();
                 previewActivity.setBarStatus();
             }
         });
@@ -87,18 +85,18 @@ public class PreviewFragment extends Fragment {
                     if (isIntentAvailable(getContext(), intent)) {
                         startActivity(intent);
                     } else {
-                        Toast.makeText(getContext(),getString(R.string.cant_play_video), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.cant_play_video), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
     }
 
-    Uri getUri(String path){
+    Uri getUri(String path) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-          return   FileProvider.getUriForFile(getActivity(), getActivity().getPackageName()+ ".dmc", new File(path));
-        }else {
-          return Uri.fromFile(new File(path));
+            return FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".dmc", new File(path));
+        } else {
+            return Uri.fromFile(new File(path));
         }
     }
 
