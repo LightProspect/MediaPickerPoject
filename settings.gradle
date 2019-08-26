@@ -1,1 +1,1 @@
-include ':mediapicker'
+include ':mediapicker',':app'
